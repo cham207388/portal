@@ -38,9 +38,8 @@ public class Company {
     @Column(name = "FOUNDED", nullable = false)
     private Integer founded;
 
-    @Lob
-    @Column(name = "DESCRIPTION")
-    private String description;
+     @Column(name = "DESCRIPTION")
+     private String description;
 
     @Column(name = "EMPLOYEES")
     private Integer employees;
