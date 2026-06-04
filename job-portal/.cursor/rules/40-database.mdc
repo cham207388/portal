@@ -1,0 +1,14 @@
+---
+description: Rules for PostgreSQL, JPA, and Flyway changes
+alwaysApply: true
+---
+
+# Database rules
+
+- Every schema change must be delivered through Flyway migration.
+- Do not edit older migrations that may already be applied in shared environments.
+- Prefer additive, backward-compatible migrations when possible.
+- Be explicit about indexes, nullability, defaults, and foreign keys.
+- Keep entity mappings simple and readable.
+- Avoid eager fetching unless strongly justified.
+- Call out transactional implications and data migration risks when changing persistence behavior.

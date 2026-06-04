@@ -1,0 +1,14 @@
+---
+description: Testing rules for Spring Boot 4 services, controllers, and persistence code
+alwaysApply: true
+---
+
+# Testing rules
+
+- Prefer fast unit tests first.
+- Add integration tests when behavior depends on Spring context, database access, or serialization.
+- For controller tests, prefer MockMvc unless the repo standardizes differently.
+- For database integration, prefer Testcontainers over brittle local assumptions.
+- Avoid mocking what you do not own when a slice or integration test is more truthful.
+- Test happy path, validation failures, and one important edge case at minimum.
+- Do not remove tests to make builds pass.

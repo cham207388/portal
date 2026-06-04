@@ -1,0 +1,14 @@
+---
+description: Rules for secure Spring Boot coding
+alwaysApply: true
+---
+
+# Security rules
+
+- Do not hardcode secrets, credentials, tokens, or private keys.
+- Use configuration properties and environment-backed values.
+- Validate and sanitize external input.
+- Apply least privilege assumptions for integrations.
+- Prefer explicit authorization checks over assumptions.
+- Call out security implications when adding endpoints, file upload, deserialization, or outbound HTTP integrations.
+- Never log secrets or sensitive personal data.

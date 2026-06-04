@@ -1,0 +1,10 @@
+services:
+  postgres:
+    image: 'postgres:16-alpine'
+    environment:
+      - 'POSTGRES_DB=jobportal'
+      - 'POSTGRES_PASSWORD=postgres'
+      - 'POSTGRES_USER=postgres'
+    container_name: 'jobportal'
+    ports:
+      - '5433:5432'

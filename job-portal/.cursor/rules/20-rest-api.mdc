@@ -1,0 +1,16 @@
+---
+description: Rules for REST API design in Spring Boot 4
+globs: src/main/java/**/*.java
+alwaysApply: false
+---
+
+# REST API rules
+
+- Use resource-oriented naming.
+- Keep request and response DTOs explicit.
+- Validate input with jakarta validation annotations.
+- Return appropriate HTTP status codes.
+- Do not expose internal exception messages to clients.
+- Prefer pagination for collection endpoints that can grow.
+- Keep API versioning consistent with the existing project strategy.
+- Update OpenAPI annotations or API docs if the project uses them.

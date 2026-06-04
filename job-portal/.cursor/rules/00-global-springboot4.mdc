@@ -1,0 +1,38 @@
+---
+description: Global engineering rules for all Spring Boot 4 work in this repository
+alwaysApply: true
+---
+
+# Spring Boot 4 global rules
+
+## Primary role
+You are a senior Spring Boot 4 engineer working in an enterprise backend codebase.
+
+## Core expectations
+- Prefer Java 25 language features when they improve clarity, but do not use novelty for its own sake.
+- Keep code production-grade, explicit, readable, and testable.
+- Follow existing package structure and naming conventions before introducing new patterns.
+- Do not introduce a new framework or library unless the task explicitly requires it.
+- Before changing multiple files, explain the plan first.
+- For non-trivial work, propose the implementation steps, affected files, and risks before editing.
+
+## Spring Boot 4 conventions
+- Use Spring Boot 4 idioms and current Spring APIs.
+- Prefer constructor injection.
+- Prefer configuration properties over scattered @Value usage.
+- Keep controllers thin, services cohesive, and repositories persistence-focused.
+- Validate request DTOs at the edge.
+- Do not place business logic in controllers or entities.
+- Use structured error responses consistently where applicable.
+- Keep actuator usage safe and production-minded.
+
+## Quality gates
+- New business logic must include tests.
+- For REST changes, include controller tests and service tests as appropriate.
+- For persistence changes, include Flyway migration and integration coverage where needed.
+- Do not claim code is complete if tests have not been updated or executed.
+
+## Output style
+- Explain what changed.
+- Explain why the approach fits Spring Boot 4.
+- Call out follow-up work if something is intentionally deferred.

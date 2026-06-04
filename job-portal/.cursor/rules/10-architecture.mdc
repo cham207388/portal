@@ -1,0 +1,21 @@
+---
+description: Architecture rules for layered Spring Boot backend development
+alwaysApply: true
+---
+
+# Architecture
+
+- Use this layering unless the repo already uses a different validated pattern:
+  - controller
+  - service
+  - repository
+  - domain/model
+  - dto
+  - mapper
+  - config
+- Keep DTOs separate from entities.
+- Prefer explicit mappers over leaking JPA entities directly to the API layer.
+- Use domain-focused service names.
+- Avoid god services and utility dumping grounds.
+- Keep transactions in service layer boundaries.
+- For cross-cutting concerns, prefer Spring mechanisms such as filters, interceptors, advice, configuration, or dedicated components.
