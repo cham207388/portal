@@ -1,4 +1,4 @@
-package com.abc.jobportal.service;
+package com.abc.jobportal.company.service;
 
 import com.abc.jobportal.dto.CompanyDto;
 

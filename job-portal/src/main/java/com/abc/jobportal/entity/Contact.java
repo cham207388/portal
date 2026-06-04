@@ -26,7 +26,7 @@ public class Contact {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "message", nullable = false)
+    @Column(name = "message", nullable = false, length = Integer.MAX_VALUE)
     private String message;
 
     @Column(name = "name", nullable = false)
@@ -47,4 +47,6 @@ public class Contact {
 
     @Column(name = "user_type", nullable = false, length = 50)
     private String userType;
+
+
 }

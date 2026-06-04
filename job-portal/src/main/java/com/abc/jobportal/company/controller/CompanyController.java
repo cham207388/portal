@@ -1,6 +1,6 @@
 package com.abc.jobportal.company.controller;
 
-import com.abc.jobportal.service.ICompanyService;
+import com.abc.jobportal.company.service.ICompanyService;
 import com.abc.jobportal.dto.CompanyDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
