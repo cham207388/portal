@@ -8,3 +8,5 @@ services:
     container_name: 'jobportal'
     ports:
       - '5433:5432'
+    volumes:
+      - ../pg-volume:/var/lib/postgresql/data
