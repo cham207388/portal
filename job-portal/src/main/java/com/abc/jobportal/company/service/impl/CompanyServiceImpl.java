@@ -19,7 +19,7 @@ public class CompanyServiceImpl implements ICompanyService {
 
     @Override
     public List<CompanyDto> getAllCompanies() {
-        List<Company> companyList =companyRepository.findAll();
+        List<Company> companyList = companyRepository.findAll();
         return companyList.stream().map(this::transformToDto).collect(Collectors.toList());
     }
 
