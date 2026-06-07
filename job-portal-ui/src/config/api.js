@@ -22,7 +22,7 @@ export const getAcceptHeader = (version = DEFAULT_API_VERSION) =>
 // API Endpoints
 export const API_ENDPOINTS = {
   // Company endpoints
-  COMPANIES: "/companies",
+  COMPANIES: "/companies/public",
   COMPANY_BY_ID: (id) => `/companies/${id}`,
 
   // Job endpoints (placeholder for future use)

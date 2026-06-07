@@ -28,6 +28,11 @@ spring:
         command: up
       stop:
         command: stop
+  security:
+    user:
+      name: ebrahim
+      password: password
+      roles: USER,ADMIN
 
 logging:
   pattern:
