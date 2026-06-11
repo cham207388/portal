@@ -1,9 +1,10 @@
 package com.abc.jobportal.security.util;
 
+import com.abc.jobportal.constants.ApplicationConstants;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -17,23 +18,20 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class JwtUtil {
 
-    @Value("${jwt.secret}")
-    private String jwtSecret;
-
-    @Value("${jwt.expiration-ms:86400000}")
-    private long jwtExpirationMs;
+    private final Environment env;
 
     public String generateJwtToken(Authentication authentication){
         String jwtToken;
-        SecretKey secretKey = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
+        String secret = env.getProperty(ApplicationConstants.JWT_SECRET_KEY,
+                ApplicationConstants.JWT_SECRET_DEFAULT_VALUE);
+        SecretKey secretKey = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
         var fetchedUser = (User) authentication.getPrincipal();
-        assert fetchedUser != null;
         jwtToken = Jwts.builder().issuer("Job Portal").subject("JWT Token")
                 .claim("username", fetchedUser.getUsername())
                 .claim("roles", authentication.getAuthorities().stream().map(
                         GrantedAuthority::getAuthority).collect(Collectors.joining(",")))
                 .issuedAt(new java.util.Date())
-                .expiration(new java.util.Date((new java.util.Date()).getTime() + jwtExpirationMs))
+                .expiration(new java.util.Date((new java.util.Date()).getTime() + ApplicationConstants.EXPIRATION_TIME))
                 .signWith(secretKey).compact();
         return jwtToken;
     }
