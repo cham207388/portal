@@ -1,10 +1,10 @@
 package com.abc.jobportal.constants;
 
-public class ApplicationConstants {
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
-    private ApplicationConstants() {
-        throw new AssertionError("Utility class cannot be instantiated");
-    }
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class ApplicationConstants {
 
     public static final String JWT_SECRET_KEY = "JWT_SECRET";
     public static final String JWT_SECRET_DEFAULT_VALUE = "jxgEQeXHuPq8VdbyYFNkANdudQ53YUn4";
