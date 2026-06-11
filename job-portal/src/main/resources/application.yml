@@ -31,6 +31,7 @@ spring:
 
 jwt:
   secret: ${JWT_SECRET:jxgEQeXHuPq8VdbyYFNkANdudQ53YUn4}
+  expiration-ms: ${JWT_EXPIRATION_MS:86400000}
 
 #  security:
 #    user:

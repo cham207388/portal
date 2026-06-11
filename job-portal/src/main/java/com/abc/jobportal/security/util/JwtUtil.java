@@ -20,6 +20,9 @@ public class JwtUtil {
     @Value("${jwt.secret}")
     private String jwtSecret;
 
+    @Value("${jwt.expiration-ms:86400000}")
+    private long jwtExpirationMs;
+
     public String generateJwtToken(Authentication authentication){
         String jwtToken;
         SecretKey secretKey = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
@@ -30,7 +33,7 @@ public class JwtUtil {
                 .claim("roles", authentication.getAuthorities().stream().map(
                         GrantedAuthority::getAuthority).collect(Collectors.joining(",")))
                 .issuedAt(new java.util.Date())
-                .expiration(new java.util.Date((new java.util.Date()).getTime() + 24 * 60 * 60 * 1000))
+                .expiration(new java.util.Date((new java.util.Date()).getTime() + jwtExpirationMs))
                 .signWith(secretKey).compact();
         return jwtToken;
     }
