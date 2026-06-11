@@ -1,10 +1,9 @@
 package com.abc.jobportal.security.util;
 
-import com.abc.jobportal.constants.ApplicationConstants;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.env.Environment;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -18,13 +17,12 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class JwtUtil {
 
-    private final Environment env;
+    @Value("${jwt.secret}")
+    private String jwtSecret;
 
     public String generateJwtToken(Authentication authentication){
         String jwtToken;
-        String secret = env.getProperty(ApplicationConstants.JWT_SECRET_KEY,
-                ApplicationConstants.JWT_SECRET_DEFAULT_VALUE);
-        SecretKey secretKey = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+        SecretKey secretKey = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
         var fetchedUser = (User) authentication.getPrincipal();
         assert fetchedUser != null;
         jwtToken = Jwts.builder().issuer("Job Portal").subject("JWT Token")
