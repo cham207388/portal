@@ -63,5 +63,4 @@ public class CompanyServiceImpl implements ICompanyService {
                 job.getStatus()
         );
     }
-
 }

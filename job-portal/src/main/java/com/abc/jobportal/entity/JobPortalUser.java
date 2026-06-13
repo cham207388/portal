@@ -15,7 +15,7 @@ import java.time.Instant;
 @Setter
 @Entity
 @Table(name = "users")
-public class JobPortalUser {
+public class JobPortalUser extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -50,20 +50,4 @@ public class JobPortalUser {
     @JoinColumn(name = "company_id")
     private Company company;
 
-    @NotNull
-    @ColumnDefault("CURRENT_TIMESTAMP")
-    @Column(name = "created_at", nullable = false)
-    private Instant createdAt;
-
-    @Size(max = 20)
-    @NotNull
-    @Column(name = "created_by", nullable = false, length = 20)
-    private String createdBy;
-
-    @Column(name = "updated_at")
-    private Instant updatedAt;
-
-    @Size(max = 20)
-    @Column(name = "updated_by", length = 20)
-    private String updatedBy;
 }

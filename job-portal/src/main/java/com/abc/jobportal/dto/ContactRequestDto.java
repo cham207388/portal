@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 import java.io.Serializable;
 
 public record ContactRequestDto(
+
         @NotBlank(message = "Email can not be empty")
         @Email(message = "Invalid email address")
         String email,
@@ -27,5 +28,6 @@ public record ContactRequestDto(
         @NotBlank(message = "UserType can not be empty")
         @Pattern(regexp = "Job Seeker|Employer|Other", message = "UserType must be one of: Job Seeker, Employer, Other")
         String userType
+
 ) implements Serializable {
 }

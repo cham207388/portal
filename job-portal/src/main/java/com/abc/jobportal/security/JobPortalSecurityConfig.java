@@ -36,7 +36,6 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @RequiredArgsConstructor
 public class JobPortalSecurityConfig {
 
-
     @Qualifier("publicPaths")
     private final List<String> publicPaths;
 

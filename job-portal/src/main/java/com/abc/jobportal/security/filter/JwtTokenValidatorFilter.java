@@ -42,7 +42,7 @@ public class JwtTokenValidatorFilter extends OncePerRequestFilter {
             try {
                 // Extract the JWT token
                 // Whoever bears (holds) the token is trusted and can access the protected resource.
-                String jwt = authHeader.substring(ApplicationConstants.BEARER_PREFIX.length()); // Remove 'Bearer ' prefix
+                String jwt = authHeader.substring(7); // Remove 'Bearer ' prefix
                 Environment env = getEnvironment();
                 if (null != env) {
                     String secret = env.getProperty(ApplicationConstants.JWT_SECRET_KEY,

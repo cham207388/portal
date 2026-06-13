@@ -19,5 +19,4 @@ public class UserDto {
     private Long companyId;
     private String companyName;
     private Instant createdAt;
-
 }

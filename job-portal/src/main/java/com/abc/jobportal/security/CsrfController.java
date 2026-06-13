@@ -14,5 +14,4 @@ public class CsrfController {
     public CsrfToken csrfToken(HttpServletRequest request) {
         return (CsrfToken) request.getAttribute(CsrfToken.class.getName());
     }
-
 }
