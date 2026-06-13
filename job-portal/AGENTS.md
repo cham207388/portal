@@ -24,11 +24,12 @@ A good change in this repo:
 ## Tech assumptions
 - Java 25
 - Spring Boot 4.x
-- Gradle
+- Gradle 9 (use the project wrapper: `./gradlew`)
 - PostgreSQL
 - Flyway
 - JUnit 5
 - Testcontainers
+ - Doppler (secrets injected at runtime; see README.md)
 
 ## Repository-specific preferences
 - Prefer constructor injection.
@@ -36,3 +37,11 @@ A good change in this repo:
 - Prefer configuration properties for grouped settings.
 - Avoid large helper classes.
 - Avoid changing build files unless needed for the task.
+ - Secrets: the repo uses Doppler for secret management; local/CI runs that need DB credentials expect DB_URL, DB_USERNAME, DB_PASSWORD environment variables (see `README.md`). Use `doppler run -- ./gradlew` when running the app locally with secrets.
+ - Flyway migrations are the canonical schema source and live in `src/main/resources/db/migration` — always add migrations for schema changes rather than altering entities only.
+ - Project layout examples the agent should follow:
+   - controllers: `src/main/java/com/abc/jobportal/**/controller` (e.g. `company/controller/CompanyController.java`)
+   - services: `src/main/java/com/abc/jobportal/**/service` and `service/impl` for implementations
+   - repositories: `src/main/java/com/abc/jobportal/**/repository`
+   - DTOs: `src/main/java/com/abc/jobportal/dto` (records are used, e.g. `JobDto.java`)
+ - Prefer running tests via the Gradle wrapper `./gradlew test`. Integration tests may require Docker (Testcontainers) to be available locally.
