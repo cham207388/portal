@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, String>> handleException(MethodArgumentNotValidException exception) {
+    public ResponseEntity<Map<String,String>> handleException(MethodArgumentNotValidException exception) {
         Map<String, String> errors = new HashMap<>();
         List<FieldError> fieldErrorList = exception.getBindingResult().getFieldErrors();
         fieldErrorList.forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
@@ -37,7 +37,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(HandlerMethodValidationException.class)
-    public ResponseEntity<Map<String, String>> handleException(HandlerMethodValidationException exception) {
+    public ResponseEntity<Map<String,String>> handleException(HandlerMethodValidationException exception) {
         Map<String, String> errors = new HashMap<>();
         List<ParameterValidationResult> results = exception.getParameterValidationResults();
         results.forEach(result -> {
@@ -57,8 +57,15 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponseDto> handleNullException(Exception exception, WebRequest webRequest) {
         ErrorResponseDto errorResponseDto = new ErrorResponseDto(
                 webRequest.getDescription(false), HttpStatus.INTERNAL_SERVER_ERROR,
-                "A NullPointerException occurred due to : " + exception.getMessage(), LocalDateTime.now());
+                "A NullPointerException occurred due to : "+exception.getMessage(), LocalDateTime.now());
         return new ResponseEntity<>(errorResponseDto, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler(RegistrationValidationException.class)
+    public ResponseEntity<Map<String, String>> handleRegistrationException(
+            RegistrationValidationException ex) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(ex.getErrors());
+    }
 }

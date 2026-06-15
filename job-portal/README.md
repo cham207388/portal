@@ -145,8 +145,8 @@ curl -X POST http://localhost:8082/api/companies \
 | Method | Endpoint                    | Auth | CSRF | Purpose               |
 |--------|-----------------------------|------|------|-----------------------|
 | GET    | `/api/csrf-token/public`    | No   | No   | Fetch CSRF token      |
-| POST   | `/api/auth/register/public` | No   | No   | Register new user     |
-| POST   | `/api/auth/login/public`    | No   | No   | Login & get JWT token |
+| POST   | `/api/auth/register/public` | No   | Yes  | Register new user     |
+| POST   | `/api/auth/login/public`    | No   | Yes  | Login & get JWT token |
 | GET    | `/api/companies`            | Yes  | No   | List companies        |
 | POST   | `/api/companies`            | Yes  | Yes  | Create company        |
 | GET    | `/api/contacts/public`      | No   | No   | List public contacts  |
