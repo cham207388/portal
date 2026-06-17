@@ -12,11 +12,11 @@ public interface CompanyRepository extends JpaRepository<Company, Long> {
     @Query("SELECT DISTINCT c FROM Company c JOIN FETCH c.jobs j WHERE j.status = :status")
     List<Company> findAllWithJobsByStatus(@Param("status") String status);
 
-    List<Company> fetchCompaniesWithJobsByStatus(@Param("status") String status);
+//    List<Company> fetchCompaniesWithJobsByStatus(@Param("status") String status); corresponds to the NamedQueries in the Company entity
 
     @Query(value = "SELECT DISTINCT c.* FROM companies c JOIN jobs j ON c.id = j.company_id WHERE j.status = ?",
             nativeQuery = true)
     List<Company> findAllWithJobsByStatusNative(String status);
 
-    List<Company> fetchCompaniesWithJobsByStatusNative(String status);
+//    List<Company> fetchCompaniesWithJobsByStatusNative(String status); corresponds to the NamedNativeQueries in the Company entity
 }

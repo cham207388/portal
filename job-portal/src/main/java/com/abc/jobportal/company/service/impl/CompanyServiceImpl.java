@@ -22,7 +22,7 @@ public class CompanyServiceImpl implements ICompanyService {
 
     @Override
     public List<CompanyDto> getAllCompanies() {
-        List<Company> companyList = companyRepository.fetchCompaniesWithJobsByStatus(ApplicationConstants.ACTIVE_STATUS);
+        List<Company> companyList = companyRepository.findAllWithJobsByStatus(ApplicationConstants.ACTIVE_STATUS);
         return companyList.stream().map(this::transformCompanyToDto).collect(Collectors.toList());
     }
 
