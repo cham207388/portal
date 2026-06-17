@@ -18,6 +18,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: ${HIBERNATE_FORMAT_SQL:true}
+        default_batch_fetch_size: ${DEFAULT_BATCH_SIZE:50}
   sql:
     init:
       mode: always

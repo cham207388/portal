@@ -13,4 +13,5 @@ public final class ApplicationConstants {
     public static final String BEARER_PREFIX = "Bearer ";
     public static final int EXPIRATION_TIME = 24 * 60 * 60 * 1000;
 
+    public static final String ACTIVE_STATUS = "ACTIVE";
 }

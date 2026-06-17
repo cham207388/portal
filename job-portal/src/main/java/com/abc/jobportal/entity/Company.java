@@ -3,6 +3,7 @@ package com.abc.jobportal.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -49,6 +50,7 @@ public class Company extends BaseEntity {
     @Column(name = "WEBSITE", length = 500)
     private String website;
 
+    @BatchSize(size = 10)
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Job> jobs = new ArrayList<>();
 
