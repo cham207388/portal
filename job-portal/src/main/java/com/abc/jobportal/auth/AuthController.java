@@ -35,12 +35,11 @@ public class AuthController {
     private final JobPortalUserRepository jobPortalUserRepository;
     private final RoleRepository roleRepository;
 
-    @PostMapping(value = "/login/public", version = "1.0")
+    @PostMapping(value = "/login/public",version = "1.0")
     public ResponseEntity<LoginResponseDto> apiLogin(@RequestBody LoginRequestDto loginRequestDto) {
         try {
-            var resultAuthentication = authenticationManager
-                    .authenticate(new UsernamePasswordAuthenticationToken(loginRequestDto.username(),
-                            loginRequestDto.password()));
+            var resultAuthentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequestDto.username(),
+                    loginRequestDto.password()));
             // Generate JWT token
             String jwtToken = jwtUtil.generateJwtToken(resultAuthentication);
             var userDto = new UserDto();
@@ -64,7 +63,7 @@ public class AuthController {
 
     }
 
-    @PostMapping(value = "/register/public", version = "1.0")
+    @PostMapping(value = "/register/public",version = "1.0")
     public ResponseEntity<?> registerUser(@RequestBody RegisterRequestDto registerRequestDto) {
         JobPortalUser jobPortalUser = new JobPortalUser();
         BeanUtils.copyProperties(registerRequestDto, jobPortalUser);

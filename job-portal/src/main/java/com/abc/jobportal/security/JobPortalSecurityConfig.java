@@ -1,6 +1,7 @@
 package com.abc.jobportal.security;
 
 import com.abc.jobportal.security.filter.JwtTokenValidatorFilter;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,7 +13,6 @@ import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.password.CompromisedPasswordChecker;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -27,8 +27,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Collections;
 import java.util.List;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 @Slf4j
 @Configuration
 @EnableWebSecurity
@@ -41,21 +39,32 @@ public class JobPortalSecurityConfig {
     @Qualifier("securedPaths")
     private final List<String> securedPaths;
 
+    @Qualifier("adminPaths")
+    private final List<String> adminPaths;
+
     @Bean
     SecurityFilterChain customSecurityFilterChain(HttpSecurity http) {
         return http.csrf(csrfConfig -> csrfConfig
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                         .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler()))
-                .cors(corsConfig -> corsConfig.configurationSource(corsConfigurationSource()))
-                .authorizeHttpRequests(requests -> {
-                    publicPaths.forEach(path -> requests.requestMatchers(path).permitAll());
-                    securedPaths.forEach(path -> requests.requestMatchers(path).authenticated());
-                    requests.anyRequest().denyAll();
-                })
-                .addFilterBefore(new JwtTokenValidatorFilter(publicPaths), BasicAuthenticationFilter.class)
-                .formLogin(AbstractHttpConfigurer::disable)
-                .httpBasic(withDefaults())
-                .build();
+                    .cors(corsConfig -> corsConfig.configurationSource(corsConfigurationSource()))
+                    .authorizeHttpRequests(requests -> {
+                        publicPaths.forEach(path -> requests.requestMatchers(path).permitAll());
+                        adminPaths.forEach(path -> requests.requestMatchers(path).hasRole("ADMIN"));
+                        securedPaths.forEach(path -> requests.requestMatchers(path).authenticated());
+                        requests.anyRequest().denyAll();
+                    })
+                     .addFilterBefore(new JwtTokenValidatorFilter(publicPaths), BasicAuthenticationFilter.class)
+                    .formLogin(flc -> flc.disable())
+                    .httpBasic(hbc -> hbc.disable())
+                .exceptionHandling(exception -> exception
+                        .accessDeniedHandler((request, response, accessDeniedException) -> {
+                            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                            response.setContentType("application/json");
+                            response.getWriter().write("{\"error\": \"Access Denied\", \"message\": \"You don't have permission to access this resource\"}");
+                        })
+                )
+                    .build();
     }
 
     @Bean

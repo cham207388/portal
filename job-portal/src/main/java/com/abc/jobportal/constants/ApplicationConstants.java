@@ -14,4 +14,9 @@ public final class ApplicationConstants {
     public static final int EXPIRATION_TIME = 24 * 60 * 60 * 1000;
 
     public static final String ACTIVE_STATUS = "ACTIVE";
+
+    public static final String  NEW_MESSAGE = "NEW";
+    public static final String  CLOSED_MESSAGE = "CLOSED";
+
+    public static final String  SYSTEM = "SYSTEM";
 }
