@@ -5,10 +5,14 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
+@Entity
 @Getter
 @Setter
-@Entity
 @Table(name = "contacts")
+@NamedQueries({
+        @NamedQuery(name= "Contact.updateStatusById",
+        query = "UPDATE Contact c SET c.status = :status, c.updatedAt = CURRENT_TIMESTAMP, c.updatedBy = :updatedBy WHERE c.id = :id")
+})
 public class Contact extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
