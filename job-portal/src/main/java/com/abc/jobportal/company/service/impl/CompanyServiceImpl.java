@@ -31,8 +31,8 @@ public class CompanyServiceImpl implements ICompanyService {
 
     @Override
     public List<CompanyDto> getAllCompaniesForAdmin() {
-        List<Company> companyList =companyRepository.findAll();
-        return companyList.stream().map(this::transformCompanyToDtoForAdmin).collect(Collectors.toList());
+        // Use JPQL constructor-expression repository method to load only required columns into CompanyDto
+        return companyRepository.findAllAsDto();
     }
 
     @Transactional

@@ -19,4 +19,6 @@ public final class ApplicationConstants {
     public static final String  CLOSED_MESSAGE = "CLOSED";
 
     public static final String  SYSTEM = "SYSTEM";
+    public static final String ROLE_ADMIN = "ROLE_ADMIN";
+    public static final String ROLE_EMPLOYER = "ROLE_EMPLOYER";
 }

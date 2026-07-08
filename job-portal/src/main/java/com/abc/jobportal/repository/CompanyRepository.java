@@ -1,6 +1,8 @@
 package com.abc.jobportal.repository;
 
 import com.abc.jobportal.entity.Company;
+import com.abc.jobportal.dto.CompanyDto;
+import com.abc.jobportal.dto.CompanySummaryProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -15,6 +17,13 @@ public interface CompanyRepository extends JpaRepository<Company, Long> {
     List<Company> findAllWithJobsByStatus(@Param("status") String status);
 
     List<Company> fetchCompaniesWithJobsByStatus(@Param("status") String status);
+    
+    // Projection-based method to return only summary fields for companies (avoids loading full entity)
+    List<CompanySummaryProjection> findAllProjectedBy();
+
+    // JPQL constructor expression to construct CompanyDto directly from selected columns.
+    @Query("SELECT new com.abc.jobportal.dto.CompanyDto(c.id, c.name, c.logo, c.industry, c.size, c.rating, c.locations, c.founded, c.description, c.employees, c.website, c.createdAt, null) FROM Company c")
+    List<CompanyDto> findAllAsDto();
 
     @Query(value = "SELECT DISTINCT c.* FROM companies c JOIN jobs j ON c.id = j.company_id WHERE j.status = ?",
             nativeQuery = true)
