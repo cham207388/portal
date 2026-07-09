@@ -26,14 +26,14 @@ public class CompanyServiceImpl implements ICompanyService {
 
     @Override
     public List<CompanyDto> getAllCompanies() {
-        List<Company> companyList =companyRepository.fetchCompaniesWithJobsByStatus(ApplicationConstants.ACTIVE_STATUS);
+        List<Company> companyList = companyRepository.fetchCompaniesWithJobsByStatus(ApplicationConstants.ACTIVE_STATUS);
         return companyList.stream().map(this::transformCompanyToDto).collect(Collectors.toList());
     }
 
     @Cacheable("companies")
     @Override
     public List<CompanyDto> getAllCompaniesForAdmin() {
-        List<Company> companyList =companyRepository.findAll();
+        List<Company> companyList = companyRepository.findAll();
         return companyList.stream().map(this::transformCompanyToDtoForAdmin).collect(Collectors.toList());
     }
 
@@ -47,10 +47,10 @@ public class CompanyServiceImpl implements ICompanyService {
     @Override
     public boolean updateCompanyDetails(Long id, CompanyDto companyDto) {
         int updatedRecords = companyRepository.updateCompanyDetails(
-                id,companyDto.name(),companyDto.logo(),
-                companyDto.industry(),companyDto.size(),companyDto.rating(),
-                companyDto.locations(),companyDto.founded(),companyDto.description(),
-                companyDto.employees(),companyDto.website()
+                id, companyDto.name(), companyDto.logo(),
+                companyDto.industry(), companyDto.size(), companyDto.rating(),
+                companyDto.locations(), companyDto.founded(), companyDto.description(),
+                companyDto.employees(), companyDto.website()
         );
         return updatedRecords > 0;
     }
@@ -70,7 +70,7 @@ public class CompanyServiceImpl implements ICompanyService {
         return new CompanyDto(company.getId(), company.getName(), company.getLogo(),
                 company.getIndustry(), company.getSize(), company.getRating(),
                 company.getLocations(), company.getFounded(), company.getDescription(),
-                company.getEmployees(), company.getWebsite(), company.getCreatedAt(),jobDtos);
+                company.getEmployees(), company.getWebsite(), company.getCreatedAt(), jobDtos);
     }
 
     private Company transformCompanyDtoToEntity(CompanyDto companyDto) {
@@ -83,7 +83,7 @@ public class CompanyServiceImpl implements ICompanyService {
         return new CompanyDto(company.getId(), company.getName(), company.getLogo(),
                 company.getIndustry(), company.getSize(), company.getRating(),
                 company.getLocations(), company.getFounded(), company.getDescription(),
-                company.getEmployees(), company.getWebsite(), company.getCreatedAt(),null);
+                company.getEmployees(), company.getWebsite(), company.getCreatedAt(), null);
     }
 
 }

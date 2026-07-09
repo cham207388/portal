@@ -31,7 +31,7 @@ public interface CompanyRepository extends JpaRepository<Company, Long> {
     void deleteById(Long id);
 
     @CacheEvict(value = "companies", allEntries = true)
-    Company save(Company entity);
+    <S extends Company> S save(S entity);
 
     @CacheEvict(value = "companies", allEntries = true)
     @Modifying(clearAutomatically = true, flushAutomatically = true)
