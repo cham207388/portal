@@ -28,11 +28,14 @@ A good change in this repo:
 - PostgreSQL
 - Flyway
 - JUnit 5
-- Testcontainers
-- Doppler (secrets injected at runtime; see README.md)
-- Lombok (for @RequiredArgsConstructor, @Getter, @Setter)
-- Spring Data JPA with auditing support
-- JWT for authentication
+Testcontainers (optional; not included in the project build by default)
+Doppler (secrets injected at runtime; see README.md)
+Lombok (for @RequiredArgsConstructor, @Getter, @Setter)
+Spring Data JPA with auditing support
+JWT for authentication
+springdoc-openapi (Swagger UI available via dependency `org.springdoc:springdoc-openapi-starter-webmvc-ui`)
+Caffeine cache (dependency `com.github.ben-manes.caffeine:caffeine` is used)
+H2 console (dev convenience; dependency `spring-boot-h2console` is included)
 
 ## Repository-specific preferences
 - Prefer constructor injection.
@@ -42,6 +45,8 @@ A good change in this repo:
 - Avoid changing build files unless needed for the task.
 - Secrets: the repo uses Doppler for secret management; local/CI runs that need DB credentials expect DB_URL, DB_USERNAME, DB_PASSWORD environment variables (see `README.md`). Use `doppler run -- ./gradlew` when running the app locally with secrets.
 - Flyway migrations are the canonical schema source and live in `src/main/resources/db/migration` — always add migrations for schema changes rather than altering entities only.
+ - Flyway migrations are the canonical schema source and live in `src/main/resources/db/migration` — always add migrations for schema changes rather than altering entities only.
+ - Note: this project uses Jakarta namespace imports (e.g. `jakarta.persistence`, `jakarta.servlet`) because it targets Spring Boot 4 / Jakarta EE — prefer `jakarta.*` imports when adding new code.
 
 ### Service & Repository Patterns
 - Services follow interface-based pattern: create `IServiceName.java` interface in `src/main/java/com/abc/jobportal/{feature}/service/` and implement with `{ServiceName}Impl.java` in `src/main/java/com/abc/jobportal/{feature}/service/impl/` (see `ICompanyService` and `CompanyServiceImpl`).
@@ -63,9 +68,10 @@ A good change in this repo:
 - `GlobalExceptionHandler` handles `MethodArgumentNotValidException`, `HandlerMethodValidationException`, and custom exceptions; returns normalized error responses.
 
 ### Security & Authentication
-- JWT authentication via custom `JwtTokenValidatorFilter` in the security filter chain.
-- Store JWT properties in configuration class (e.g., `JwtProperties`).
-- Use `JobPortalSecurityConfig` to define `SecurityFilterChain`, CORS, and custom authentication provider.
+- JWT authentication via custom `JwtTokenValidatorFilter` in the security filter chain (see `src/main/java/com/abc/jobportal/security/filter/JwtTokenValidatorFilter.java`).
+- JWT secret is read from environment/property `JWT_SECRET` (application.yml also defines `jwt.secret`). The project defines a default in `ApplicationConstants.JWT_SECRET_DEFAULT_VALUE`.
+- There is a `JwtProperties` class at `src/main/java/com/abc/jobportal/security/config/JwtProperties.java`, but it is not currently registered as a `@ConfigurationProperties` bean (annotations are commented out). Current code reads the secret from the environment/config rather than an injected `JwtProperties` bean.
+- Use `JobPortalSecurityConfig` to define `SecurityFilterChain`, CORS, and custom authentication provider. The config registers CORS with origin `http://localhost:5173` by default (see `corsConfigurationSource()` in `JobPortalSecurityConfig`).
 - Controllers use `/api/{resource}` endpoints; public endpoints use `/api/{resource}/public`.
 - Apply CSRF protection for state-changing requests (POST, PUT, DELETE) — see README for CSRF token flow.
 
@@ -89,5 +95,6 @@ A good change in this repo:
 
 ### Testing
 - Run tests via `./gradlew test`.
-- Integration tests use Testcontainers for PostgreSQL; Docker must be available locally.
+- Integration tests do not include Testcontainers by default in this repository. The project uses a Spring Boot Docker Compose lifecycle integration (see `compose.yaml`) for developer runs and relies on environment variables `DB_URL`, `DB_USERNAME`, `DB_PASSWORD` to connect to a database during local runs.
+- If you want to add Testcontainers-based integration tests, add the `org.testcontainers:postgresql` dependency and configure a Testcontainers-managed Postgres in the test sources.
 - Place test files in `src/test/java/com/abc/jobportal/` mirroring source structure.

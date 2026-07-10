@@ -58,7 +58,7 @@ const Login = () => {
   const fillDemoCredentials = (type) => {
     if (type === "employer") {
       setFormData({
-        email: "sanjana@gmail.com",
+        email: "employer@gmail.com",
         password: "EazyBytes@1803",
         userType: "employer",
       });
@@ -70,7 +70,7 @@ const Login = () => {
       });
     } else {
       setFormData({
-        email: "john@gmail.com",
+        email: "jobseeker@gmail.com",
         password: "EazyBytes@1803",
         userType: "jobSeeker",
       });
@@ -79,11 +79,10 @@ const Login = () => {
 
   return (
     <div
-      className={`min-h-[calc(100vh-5rem)] ${
-        theme === "dark"
-          ? "bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"
-          : "bg-gradient-to-br from-gray-50 via-white to-primary-50"
-      } flex items-center justify-center px-4 py-12 relative`}
+      className={`min-h-[calc(100vh-5rem)] ${theme === "dark"
+        ? "bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"
+        : "bg-gradient-to-br from-gray-50 via-white to-primary-50"
+        } flex items-center justify-center px-4 py-12 relative`}
     >
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
@@ -93,11 +92,10 @@ const Login = () => {
 
       <div className="relative z-10 w-full max-w-md">
         <div
-          className={`${
-            theme === "dark"
-              ? "bg-gray-800/80 border-gray-700/30"
-              : "bg-white/80 border-white/20"
-          } backdrop-blur-lg shadow-2xl rounded-3xl p-8 border`}
+          className={`${theme === "dark"
+            ? "bg-gray-800/80 border-gray-700/30"
+            : "bg-white/80 border-white/20"
+            } backdrop-blur-lg shadow-2xl rounded-3xl p-8 border`}
         >
           {/* Header */}
           <div className="text-center mb-8">
@@ -107,9 +105,8 @@ const Login = () => {
               </h1>
             </div>
             <p
-              className={`${
-                theme === "dark" ? "text-gray-300" : "text-gray-600"
-              } text-lg`}
+              className={`${theme === "dark" ? "text-gray-300" : "text-gray-600"
+                } text-lg`}
             >
               Sign in to your JobPortal account
             </p>
@@ -120,27 +117,24 @@ const Login = () => {
             <button
               type="button"
               onClick={() => setShowDemoCredentials(!showDemoCredentials)}
-              className={`w-full p-3 ${
-                theme === "dark"
-                  ? "bg-gradient-to-r from-blue-900/30 to-purple-900/30 border border-blue-700 text-blue-300 hover:from-blue-800/30 hover:to-purple-800/30"
-                  : "bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 text-blue-700 hover:from-blue-100 hover:to-purple-100"
-              } rounded-xl transition-all duration-300 text-sm font-medium`}
+              className={`w-full p-3 ${theme === "dark"
+                ? "bg-gradient-to-r from-blue-900/30 to-purple-900/30 border border-blue-700 text-blue-300 hover:from-blue-800/30 hover:to-purple-800/30"
+                : "bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 text-blue-700 hover:from-blue-100 hover:to-purple-100"
+                } rounded-xl transition-all duration-300 text-sm font-medium`}
             >
               {showDemoCredentials ? "Hide" : "Show"} Demo Credentials
             </button>
 
             {showDemoCredentials && (
               <div
-                className={`mt-4 p-4 ${
-                  theme === "dark"
-                    ? "bg-gradient-to-r from-gray-800 to-blue-900/30 border border-gray-700"
-                    : "bg-gradient-to-r from-gray-50 to-blue-50 border border-gray-200"
-                } rounded-xl`}
+                className={`mt-4 p-4 ${theme === "dark"
+                  ? "bg-gradient-to-r from-gray-800 to-blue-900/30 border border-gray-700"
+                  : "bg-gradient-to-r from-gray-50 to-blue-50 border border-gray-200"
+                  } rounded-xl`}
               >
                 <p
-                  className={`text-sm ${
-                    theme === "dark" ? "text-gray-300" : "text-gray-600"
-                  } mb-3 font-medium`}
+                  className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"
+                    } mb-3 font-medium`}
                 >
                   Try these demo accounts:
                 </p>
@@ -148,39 +142,36 @@ const Login = () => {
                   <button
                     type="button"
                     onClick={() => fillDemoCredentials("employer")}
-                    className={`w-full p-2 text-left ${
-                      theme === "dark"
-                        ? "bg-gray-700 border border-gray-600 hover:bg-gray-600"
-                        : "bg-white border border-gray-200 hover:bg-gray-50"
-                    } rounded-lg transition-colors text-sm`}
+                    className={`w-full p-2 text-left ${theme === "dark"
+                      ? "bg-gray-700 border border-gray-600 hover:bg-gray-600"
+                      : "bg-white border border-gray-200 hover:bg-gray-50"
+                      } rounded-lg transition-colors text-sm`}
                   >
                     <div className="font-medium text-purple-700">Employer</div>
                     <div className="text-gray-500">
-                      sanjana@gmail.com / EazyBytes@1803
+                      employer@gmail.com / EazyBytes@1803
                     </div>
                   </button>
                   <button
                     type="button"
                     onClick={() => fillDemoCredentials("jobSeeker")}
-                    className={`w-full p-2 text-left ${
-                      theme === "dark"
-                        ? "bg-gray-700 border border-gray-600 hover:bg-gray-600"
-                        : "bg-white border border-gray-200 hover:bg-gray-50"
-                    } rounded-lg transition-colors text-sm`}
+                    className={`w-full p-2 text-left ${theme === "dark"
+                      ? "bg-gray-700 border border-gray-600 hover:bg-gray-600"
+                      : "bg-white border border-gray-200 hover:bg-gray-50"
+                      } rounded-lg transition-colors text-sm`}
                   >
                     <div className="font-medium text-blue-700">Job Seeker</div>
                     <div className="text-gray-500">
-                      john@gmail.com / EazyBytes@1803
+                      jobseeker@gmail.com / EazyBytes@1803
                     </div>
                   </button>
                   <button
                     type="button"
                     onClick={() => fillDemoCredentials("admin")}
-                    className={`w-full p-2 text-left ${
-                      theme === "dark"
-                        ? "bg-gray-700 border border-gray-600 hover:bg-gray-600"
-                        : "bg-white border border-gray-200 hover:bg-gray-50"
-                    } rounded-lg transition-colors text-sm`}
+                    className={`w-full p-2 text-left ${theme === "dark"
+                      ? "bg-gray-700 border border-gray-600 hover:bg-gray-600"
+                      : "bg-white border border-gray-200 hover:bg-gray-50"
+                      } rounded-lg transition-colors text-sm`}
                   >
                     <div className="font-medium text-blue-700">Admin</div>
                     <div className="text-gray-500">
@@ -196,9 +187,8 @@ const Login = () => {
             {/* Email Field */}
             <div>
               <label
-                className={`block text-sm font-semibold ${
-                  theme === "dark" ? "text-gray-300" : "text-gray-700"
-                } mb-2`}
+                className={`block text-sm font-semibold ${theme === "dark" ? "text-gray-300" : "text-gray-700"
+                  } mb-2`}
               >
                 Email Address
               </label>
@@ -209,11 +199,10 @@ const Login = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300 outline-none ${
-                    theme === "dark"
-                      ? "bg-gray-700 border-gray-600 text-white placeholder-gray-400"
-                      : "bg-white border-gray-300 text-gray-900"
-                  }`}
+                  className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300 outline-none ${theme === "dark"
+                    ? "bg-gray-700 border-gray-600 text-white placeholder-gray-400"
+                    : "bg-white border-gray-300 text-gray-900"
+                    }`}
                   placeholder="Enter your email"
                 />
                 <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
@@ -237,9 +226,8 @@ const Login = () => {
             {/* Password Field */}
             <div>
               <label
-                className={`block text-sm font-semibold ${
-                  theme === "dark" ? "text-gray-300" : "text-gray-700"
-                } mb-2`}
+                className={`block text-sm font-semibold ${theme === "dark" ? "text-gray-300" : "text-gray-700"
+                  } mb-2`}
               >
                 Password
               </label>
@@ -250,11 +238,10 @@ const Login = () => {
                   value={formData.password}
                   onChange={handleChange}
                   required
-                  className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300 outline-none ${
-                    theme === "dark"
-                      ? "bg-gray-700 border-gray-600 text-white placeholder-gray-400"
-                      : "bg-white border-gray-300 text-gray-900"
-                  }`}
+                  className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300 outline-none ${theme === "dark"
+                    ? "bg-gray-700 border-gray-600 text-white placeholder-gray-400"
+                    : "bg-white border-gray-300 text-gray-900"
+                    }`}
                   placeholder="Enter your password"
                 />
                 <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
@@ -278,11 +265,10 @@ const Login = () => {
             {/* Success Message */}
             {successMessage && (
               <div
-                className={`p-4 rounded-xl text-sm font-medium ${
-                  theme === "dark"
-                    ? "bg-green-900/30 border border-green-700 text-green-300"
-                    : "bg-green-50 border border-green-200 text-green-700"
-                }`}
+                className={`p-4 rounded-xl text-sm font-medium ${theme === "dark"
+                  ? "bg-green-900/30 border border-green-700 text-green-300"
+                  : "bg-green-50 border border-green-200 text-green-700"
+                  }`}
               >
                 <div className="flex items-center space-x-2">
                   <svg
@@ -304,11 +290,10 @@ const Login = () => {
             {/* Error Message */}
             {error && (
               <div
-                className={`p-4 rounded-xl text-sm font-medium ${
-                  theme === "dark"
-                    ? "bg-red-900/30 border border-red-700 text-red-300"
-                    : "bg-red-50 border border-red-200 text-red-700"
-                }`}
+                className={`p-4 rounded-xl text-sm font-medium ${theme === "dark"
+                  ? "bg-red-900/30 border border-red-700 text-red-300"
+                  : "bg-red-50 border border-red-200 text-red-700"
+                  }`}
               >
                 <div className="flex items-center space-x-2">
                   <svg
@@ -346,9 +331,8 @@ const Login = () => {
             {/* Register Link */}
             <div className="text-center">
               <p
-                className={`${
-                  theme === "dark" ? "text-gray-300" : "text-gray-600"
-                }`}
+                className={`${theme === "dark" ? "text-gray-300" : "text-gray-600"
+                  }`}
               >
                 Don't have an account?{" "}
                 <Link
