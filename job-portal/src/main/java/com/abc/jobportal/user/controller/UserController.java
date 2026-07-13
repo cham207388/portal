@@ -74,6 +74,9 @@ public class UserController {
     public ResponseEntity<ProfileDto> getProfile(Authentication authentication) {
         String userEmail = authentication.getName();
         ProfileDto profileDto = userService.getProfile(userEmail);
+        if (profileDto == null) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(profileDto);
     }
 
@@ -81,6 +84,9 @@ public class UserController {
     public ResponseEntity<byte[]> getProfilePicture(Authentication authentication) {
         String userEmail = authentication.getName();
         ProfileDto profileDto = userService.getProfilePicture(userEmail);
+        if (profileDto == null) {
+            return ResponseEntity.notFound().build();
+        }
         byte[] picture = profileDto.profilePicture();
         if (picture == null || picture.length == 0) {
             return ResponseEntity.notFound().build();
@@ -95,6 +101,9 @@ public class UserController {
     public ResponseEntity<byte[]> getResume(Authentication authentication) {
         String userEmail = authentication.getName();
         ProfileDto profileDto = userService.getResume(userEmail);
+        if (profileDto == null) {
+            return ResponseEntity.notFound().build();
+        }
         byte[] resume = profileDto.resume();
         if (resume == null || resume.length == 0) {
             return ResponseEntity.notFound().build();
