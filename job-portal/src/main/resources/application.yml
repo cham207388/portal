@@ -52,3 +52,15 @@ jwt:
 logging:
   pattern:
     console: "%green(%d{HH:mm:ss.SSS}) %blue(%-5level) %red([%thread]) %yellow(%logger{15}) - %cyan(%msg%n)"
+
+cache:
+  jobs:
+    ttl-minutes: 5m
+    max-size: 5000
+  companies:
+    ttl-minutes: 5m
+    max-size: 500
+  roles:
+    ttl-minutes: 1
+    max-size: 100    
+    
