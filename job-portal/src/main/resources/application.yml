@@ -63,4 +63,12 @@ cache:
   roles:
     ttl-minutes: 1
     max-size: 100    
+  
+app:
+  cors:
+    allowed-origins: http://localhost:5173,https://dev.abcham.com,https://www.abcham.com
+    allowed-methods: "*"
+    allowed-headers: "*"
+    allowed-credentials: true
+    max-age: 3600
     
