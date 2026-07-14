@@ -1,0 +1,5 @@
+jwt:
+  issuer: Eazy Job Portal
+  subject: JWT Portal JWT Token
+  expiration:
+    hours: 24
