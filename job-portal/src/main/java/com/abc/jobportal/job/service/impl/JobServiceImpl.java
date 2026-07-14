@@ -1,9 +1,13 @@
 package com.abc.jobportal.job.service.impl;
 
+import com.abc.jobportal.dto.JobApplicationDto;
 import com.abc.jobportal.dto.JobDto;
+import com.abc.jobportal.dto.UpdateJobApplicationDto;
 import com.abc.jobportal.entity.Job;
+import com.abc.jobportal.entity.JobApplication;
 import com.abc.jobportal.entity.JobPortalUser;
 import com.abc.jobportal.job.service.IJobService;
+import com.abc.jobportal.repository.JobApplicationRepository;
 import com.abc.jobportal.repository.JobPortalUserRepository;
 import com.abc.jobportal.repository.JobRepository;
 import com.abc.jobportal.util.ApplicationUtility;
@@ -23,6 +27,7 @@ public class JobServiceImpl implements IJobService {
 
     private final JobRepository jobRepository;
     private final JobPortalUserRepository userRepository;
+    private final JobApplicationRepository jobApplicationRepository;
 
     @Override
     public List<JobDto> getEmployerJobs(String employerEmail) {
@@ -74,6 +79,22 @@ public class JobServiceImpl implements IJobService {
         job.setCompany(employer.getCompany());
         Job savedJob = jobRepository.save(job);
         return ApplicationUtility.transformJobToDto(savedJob);
+    }
+
+    @Override
+    public List<JobApplicationDto> getApplicationsByJobForEmployer(Long jobId) {
+        List<JobApplication> applications = jobApplicationRepository.findByJobIdOrderByAppliedAtAsc(jobId);
+        return applications.stream()
+                .map(jobApplication -> ApplicationUtility.mapToJobApplicationDto(jobApplication))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    @Override
+    public boolean updateJobApplication(UpdateJobApplicationDto dto) {
+        int updatedRows = jobApplicationRepository.updateStatusAndNotesById(
+                dto.status().name(), dto.notes(),dto.applicationId(), ApplicationUtility.getLoggedInUser());
+        return updatedRows > 0;
     }
 
     private Job tranformDtoToEntity(JobDto jobDto) {
