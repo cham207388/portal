@@ -1,0 +1,21 @@
+server:
+    port: 8082
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DB_URL:jdbc:postgresql://localhost:5433/jobportal}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+  jpa:
+    show-sql: false
+
+cache:
+  jobs:
+    ttl-minutes: 5
+  companies:
+    ttl-minutes: 5
+  
+app:
+  cors:
+    allowed-origins: http://localhost:5173,https://prod.abcham.com
+    

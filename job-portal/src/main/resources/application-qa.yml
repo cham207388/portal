@@ -28,48 +28,20 @@ spring:
       hibernate:
         format_sql: ${HIBERNATE_FORMAT_SQL:true}
         default_batch_fetch_size: ${DEFAULT_BATCH_SIZE:50}
-    show-sql: ${SHOW_SQL:true}
   sql:
     init:
       mode: always
-  docker:
-    compose:
-      lifecycle-management: start-and-stop
-      start:
-        command: up
-      stop:
-        command: stop
-
 jwt:
   secret: ${JWT_SECRET:jxgEQeXHuPq8VdbyYFNkANdudQ53YUn4}
   expiration: ${JWT_EXPIRATION:24h}
 
-#  security:
-#    user:
-#      name: ebrahim
-#      password: password
-#      roles: USER,ADMIN
-
-logging:
-  pattern:
-    console: "%green(%d{HH:mm:ss.SSS}) %blue(%-5level) %red([%thread]) %yellow(%logger{15}) - %cyan(%msg%n)"
-
 cache:
   jobs:
-    ttl-minutes: 5m
-    max-size: 5000
+    ttl-minutes: 15
   companies:
-    ttl-minutes: 5m
-    max-size: 500
-  roles:
-    ttl-minutes: 1
-    max-size: 100    
+    ttl-minutes: 15
   
 app:
   cors:
-    allowed-origins: http://localhost:5173,https://dev.abcham.com,https://www.abcham.com
-    allowed-methods: "*"
-    allowed-headers: "*"
-    allowed-credentials: true
-    max-age: 3600
+    allowed-origins: http://localhost:5173,https://qa.abcham.com,https://www.abcham.com
     
