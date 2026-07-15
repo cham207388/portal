@@ -13,14 +13,17 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.*;
 
 import java.time.Instant;
 
 @Getter
 @Setter
+@NamedQueries({
+        @NamedQuery(name= "JobApplication.updateStatusAndNotesById",
+                query = "UPDATE JobApplication j SET j.status = :status, j.notes = :notes, " +
+                        " j.updatedAt = CURRENT_TIMESTAMP, j.updatedBy = :updatedBy WHERE j.id = :id")
+})
 @Entity
 @Table(name = "job_applications")
 public class JobApplication extends BaseEntity {
