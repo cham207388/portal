@@ -72,6 +72,8 @@ H2 console (dev convenience; dependency `spring-boot-h2console` is included)
 - JWT secret is read from environment/property `JWT_SECRET` (application.yml also defines `jwt.secret`). The project defines a default in `ApplicationConstants.JWT_SECRET_DEFAULT_VALUE`.
 - There is a `JwtProperties` class at `src/main/java/com/abc/jobportal/security/config/JwtProperties.java`, but it is not currently registered as a `@ConfigurationProperties` bean (annotations are commented out). Current code reads the secret from the environment/config rather than an injected `JwtProperties` bean.
 - Use `JobPortalSecurityConfig` to define `SecurityFilterChain`, CORS, and custom authentication provider. The config registers CORS with origin `http://localhost:5173` by default (see `corsConfigurationSource()` in `JobPortalSecurityConfig`).
+ - Use `JobPortalSecurityConfig` to define `SecurityFilterChain`, CORS, and custom authentication provider. CORS is configurable via a `CorsProperties` bean (`src/main/java/com/abc/jobportal/security/util/CorsProperties.java`) and bound in the main application with `@EnableConfigurationProperties(CorsProperties.class)` (see `src/main/java/com/abc/jobportal/JobPortalApplication.java`).
+   - Configuration keys live under `app.cors` in `src/main/resources/application.yml` (example: `app.cors.allowed-origins: http://localhost:5173,https://dev.abcham.com`).
 - Controllers use `/api/{resource}` endpoints; public endpoints use `/api/{resource}/public`.
 - Apply CSRF protection for state-changing requests (POST, PUT, DELETE) — see README for CSRF token flow.
 

@@ -56,10 +56,10 @@ logging:
 
 cache:
   jobs:
-    ttl-minutes: 5m
+    ttl-minutes: 5
     max-size: 5000
   companies:
-    ttl-minutes: 5m
+    ttl-minutes: 5
     max-size: 500
   roles:
     ttl-minutes: 1
