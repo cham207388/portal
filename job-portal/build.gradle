@@ -39,8 +39,8 @@ dependencies {
     // metrics and traces dependencies requires actuator
     implementation 'org.springframework.boot:spring-boot-starter-opentelemetry'
 
-    // logback appender for opentelemetry (type depends on your logging framework, here is for logback)
-    implementation 'io.opentelemetry.instrumentation:opentelemetry-logback-appender-1.0:2.29.0-alpha'
+    // logback appender for opentelemetry — pin to 2.21.0-alpha to match Boot 4.0.5 OTEL 1.55.0
+    implementation 'io.opentelemetry.instrumentation:opentelemetry-logback-appender-1.0:2.21.0-alpha'
     implementation 'com.github.ben-manes.caffeine:caffeine'
     implementation "io.jsonwebtoken:jjwt-api:${jjwtVersion}"
     implementation "io.jsonwebtoken:jjwt-impl:${jjwtVersion}"
@@ -56,6 +56,11 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     testAnnotationProcessor 'org.projectlombok:lombok'
+}
+
+// Keep incubator aligned with Boot's OTEL 1.55 so ExtendedAttributes stays on the classpath
+configurations.configureEach {
+    resolutionStrategy.force 'io.opentelemetry:opentelemetry-api-incubator:1.55.0-alpha'
 }
 
 tasks.named('test') {

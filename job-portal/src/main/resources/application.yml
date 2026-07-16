@@ -91,7 +91,7 @@ management:
   info:
     env:
       enabled: true
-  oltp:
+  otlp:
     metrics:
       export:
         url: ${METRICS_EXPORT_URL:http://localhost:4318/v1/metrics}
@@ -99,7 +99,7 @@ management:
   opentelemetry:
     tracing:
       export:
-        oltp:
+        otlp:
           endpoint: ${OTEL_TRACING_EXPORTER_OTLP_ENDPOINT:http://localhost:4318/v1/traces}
     logging:
       export:
