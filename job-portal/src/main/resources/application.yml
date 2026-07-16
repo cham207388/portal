@@ -72,4 +72,27 @@ app:
     allowed-headers: "*"
     allowed-credentials: true
     max-age: 3600
-    
+management:
+  endpoint:
+    health:
+      show-details: always
+    configprops:
+      show-values: always
+    env:
+      show-values: always
+  endpoints:
+    web:
+#      base-path: /actuator
+      exposure:
+        include: "*"
+#  server:
+#    port: 9000
+  # to enable /actuator/info info prefix below is required
+  info:
+    env:
+      enabled: true
+info:
+  app:
+    name: ${spring.application.name}
+    version: ${APP_VERSION:1.0.0}
+    description: Job Portal Application
