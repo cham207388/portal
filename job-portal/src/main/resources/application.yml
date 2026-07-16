@@ -70,7 +70,7 @@ app:
     allowed-origins: http://localhost:5173,https://dev.abcham.com,https://www.abcham.com
     allowed-methods: "*"
     allowed-headers: "*"
-    allowed-credentials: true
+    allow-credentials: true
     max-age: 3600
 management:
   endpoint:
