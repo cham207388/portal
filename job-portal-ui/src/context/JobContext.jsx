@@ -59,10 +59,11 @@ export const JobProvider = ({ children }) => {
         const loadSavedJobs = async () => {
           try {
             const savedJobsData = await savedJobService.getSavedJobs();
-            // Transform backend data to match frontend format
-            const transformedJobs = savedJobsData.map(savedJob => ({
-              ...transformJob(savedJob.job),
-              savedAt: savedJob.savedAt
+            // Backend returns flat JobDto[]; no nested job or savedAt
+            const transformedJobs = savedJobsData.map(job => ({
+              ...transformJob(job),
+              // Join table has no save timestamp; use postedDate for UI sort/display
+              savedAt: job.postedDate,
             }));
             setSavedJobs(transformedJobs);
           } catch (error) {

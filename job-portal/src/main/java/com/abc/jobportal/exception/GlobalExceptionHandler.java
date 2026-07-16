@@ -3,7 +3,6 @@ package com.abc.jobportal.exception;
 import com.abc.jobportal.dto.ErrorResponseDto;
 import io.micrometer.tracing.TraceContext;
 import io.micrometer.tracing.Tracer;
-import jakarta.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
