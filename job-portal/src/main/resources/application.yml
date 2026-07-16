@@ -82,15 +82,32 @@ management:
       show-values: always
   endpoints:
     web:
-#      base-path: /actuator
+      base-path: /jobportal/actuator
       exposure:
         include: "*"
-#  server:
-#    port: 9000
+  server:
+    port: 9090
   # to enable /actuator/info info prefix below is required
   info:
     env:
       enabled: true
+  oltp:
+    metrics:
+      export:
+        url: ${METRICS_EXPORT_URL:http://localhost:4318/v1/metrics}
+        step: ${METRICS_EXPORT_STEP:10s}
+  opentelemetry:
+    tracing:
+      export:
+        oltp:
+          endpoint: ${OTEL_TRACING_EXPORTER_OTLP_ENDPOINT:http://localhost:4318/v1/traces}
+    logging:
+      export:
+        otlp:
+          endpoint: ${OTEL_LOGGING_EXPORTER_OTLP_ENDPOINT:http://localhost:4318/v1/logs}
+  tracing:
+    sampling:
+      probability: ${OTEL_TRACING_SAMPLING_PROBABILITY:1.0}
 info:
   app:
     name: ${spring.application.name}

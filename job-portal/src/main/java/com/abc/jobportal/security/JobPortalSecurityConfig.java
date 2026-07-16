@@ -52,7 +52,8 @@ public class JobPortalSecurityConfig {
 
     @Bean
     SecurityFilterChain customSecurityFilterChain(HttpSecurity http) {
-        return http.csrf(csrfConfig -> csrfConfig
+        return http.csrf(csrfConfig ->
+                        csrfConfig.ignoringRequestMatchers("/jobportal/actuator/**")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                         .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler()))
                 .cors(corsConfig -> corsConfig.configurationSource(corsConfigurationSource()))
@@ -73,12 +74,6 @@ public class JobPortalSecurityConfig {
                                     response.setContentType("application/json");
                                     response.getWriter().write("{\"error\": \"Access Denied\", \"message\": \"You don't have permission to access this resource\"}");
                                 })
-//                        .authenticationEntryPoint((request, response, authException) -> {
-//                            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-//                            response.setContentType("application/json");
-//                            response.getWriter().write("{\"error\": \"Unauthorized\", \"message\": \"Authentication required\"}");
-//                        })
-
                 )
                 .build();
     }

@@ -22,7 +22,7 @@ public class PathsConfig {
                 "/swagger-resources/**",
                 "/swagger-ui.html",
                 "/webjars/**",
-                "/actuator/**"
+                "/jobportal/actuator/**"
         );
     }
 
