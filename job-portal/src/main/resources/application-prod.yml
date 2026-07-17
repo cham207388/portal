@@ -18,4 +18,18 @@ cache:
 app:
   cors:
     allowed-origins: http://localhost:5173,https://prod.abcham.com
-    
+
+management:
+  otlp:
+    metrics:
+      export:
+        enabled: false
+  tracing:
+    sampling:
+      probability: 0.0
+    export:
+      enabled: false
+  logging:
+    export:
+      otlp:
+        enabled: false
