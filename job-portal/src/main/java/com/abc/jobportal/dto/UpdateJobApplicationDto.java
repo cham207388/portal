@@ -9,4 +9,5 @@ public record UpdateJobApplicationDto(
         JobApplicationStatus status,
         String notes
 ) {
+
 }

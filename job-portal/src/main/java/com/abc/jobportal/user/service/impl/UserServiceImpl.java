@@ -26,14 +26,20 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements IUserService {
 
     private final JobPortalUserRepository userRepository;
+
     private final RoleRepository roleRepository;
+
     private final CompanyRepository companyRepository;
+
     private final ProfileRepository profileRepository;
+
     private final JobRepository jobRepository;
+
     private final JobApplicationRepository jobApplicationRepository;
 
     @Override
     public Optional<UserDto> searchUserByEmail(String email) {
+
         return userRepository.findJobPortalUserByEmail(email)
                 .map(this::mapToUserDto);
     }
@@ -41,6 +47,7 @@ public class UserServiceImpl implements IUserService {
     @Transactional
     @Override
     public UserDto elevateToEmployer(Long userId) {
+
         JobPortalUser user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
 
@@ -70,6 +77,7 @@ public class UserServiceImpl implements IUserService {
     @Transactional
     @Override
     public UserDto assignCompanyToEmployer(Long userId, Long companyId) {
+
         JobPortalUser user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
         // Verify user is an employer
@@ -87,6 +95,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public ProfileDto createOrUpdateProfile(String userEmail, String profileJson,
                                             MultipartFile profilePicture, MultipartFile resume) throws JsonProcessingException {
+
         JobPortalUser user = userRepository.findJobPortalUserByEmail(userEmail)
                 .orElseThrow(() -> new RuntimeException("User not found with email: " + userEmail));
         Profile profile = user.getProfile();
@@ -103,6 +112,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public ProfileDto getProfile(String userEmail) {
+
         JobPortalUser user = userRepository.findJobPortalUserByEmail(userEmail)
                 .orElseThrow(() -> new RuntimeException("User not found with email: " + userEmail));
         if (user.getProfile() == null) {
@@ -113,6 +123,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public ProfileDto getProfilePicture(String userEmail) {
+
         JobPortalUser user = userRepository.findJobPortalUserByEmail(userEmail)
                 .orElseThrow(() -> new RuntimeException("User not found with email: " + userEmail));
         if (user.getProfile() == null) {
@@ -123,6 +134,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public ProfileDto getResume(String userEmail) {
+
         JobPortalUser user = userRepository.findJobPortalUserByEmail(userEmail)
                 .orElseThrow(() -> new RuntimeException("User not found with email: " + userEmail));
         if (user.getProfile() == null) {
@@ -293,6 +305,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     private ProfileDto mapToProfileDto(Profile profile, boolean includeBinaryData) {
+
         ProfileDto dto;
         if (includeBinaryData) {
             dto = new ProfileDto(profile.getId(), profile.getUser().getId(),
@@ -310,7 +323,9 @@ public class UserServiceImpl implements IUserService {
         }
         return dto;
     }
+
     private UserDto mapToUserDto(JobPortalUser user) {
+
         UserDto dto = new UserDto();
         BeanUtils.copyProperties(user, dto);
         dto.setUserId(user.getId());
@@ -319,4 +334,5 @@ public class UserServiceImpl implements IUserService {
         dto.setCompanyName(user.getCompany() != null ? user.getCompany().getName() : null);
         return dto;
     }
+
 }

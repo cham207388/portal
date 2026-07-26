@@ -18,6 +18,7 @@ public class ExceptionAuditAspect {
             throwing = "ex"
     )
     public void logAfterException(JoinPoint joinPoint, Exception ex) {
+
         String methodName = joinPoint.getSignature().toShortString();
         Object[] methodArgs = joinPoint.getArgs();
 

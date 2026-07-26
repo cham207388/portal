@@ -8,6 +8,7 @@ import java.time.Instant;
  * Spring Data will map query results into this interface to avoid loading full entity state.
  */
 public interface CompanySummaryProjection {
+
     Long getId();
 
     String getName();
@@ -31,5 +32,6 @@ public interface CompanySummaryProjection {
     String getWebsite();
 
     Instant getCreatedAt();
+
 }
 

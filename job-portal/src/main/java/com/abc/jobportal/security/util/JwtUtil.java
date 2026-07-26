@@ -38,7 +38,8 @@ public class JwtUtil {
     @Value("${jwt.prod.expiration.hours:1}")
     private int jwtProdExpirationHours;
 
-    public String generateJwtToken(Authentication authentication){
+    public String generateJwtToken(Authentication authentication) {
+
         String jwtToken;
         int expirationHours = jwtExpirationHours;
         // String ttlTime = env.getProperty("cache.jobs.ttl-minutes","5");
@@ -57,8 +58,9 @@ public class JwtUtil {
                 .claim("roles", authentication.getAuthorities().stream().map(
                         GrantedAuthority::getAuthority).collect(Collectors.joining(",")))
                 .issuedAt(new Date())
-                .expiration(new Date((new Date()).getTime() + expirationHours * 60 * 60 * 1000))
+                .expiration(new Date((new Date()).getTime() + expirationHours * 60 * 60 * 1000L))
                 .signWith(secretKey).compact();
         return jwtToken;
     }
+
 }

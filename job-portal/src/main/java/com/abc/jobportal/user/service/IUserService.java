@@ -35,4 +35,5 @@ public interface IUserService {
     void withdrawApplication(String userEmail, Long jobId);
 
     List<JobApplicationDto> getJobSeekerApplications(String userEmail);
+
 }

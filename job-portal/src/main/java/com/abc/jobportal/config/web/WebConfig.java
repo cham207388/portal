@@ -11,12 +11,15 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void configureApiVersioning(ApiVersionConfigurer configurer) {
+
         configurer.useMediaTypeParameter(MediaType.parseMediaType("application/vnd.eazyapp+json"), "v")
-                .addSupportedVersions("1.0","2.0","3.0").setDefaultVersion("1.0");
+                .addSupportedVersions("1.0", "2.0", "3.0").setDefaultVersion("1.0");
     }
 
     @Override
     public void configurePathMatch(PathMatchConfigurer configurer) {
+
         configurer.addPathPrefix("/api", _ -> true);
     }
+
 }

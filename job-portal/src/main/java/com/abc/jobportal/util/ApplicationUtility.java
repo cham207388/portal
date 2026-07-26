@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class ApplicationUtility {
 
     public static String getLoggedInUser() {
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication == null || !authentication.isAuthenticated() ||
@@ -31,6 +32,7 @@ public class ApplicationUtility {
     }
 
     public static JobDto transformJobToDto(Job job) {
+
         return new JobDto(
                 job.getId(),
                 job.getTitle(),
@@ -96,4 +98,5 @@ public class ApplicationUtility {
                 application.getNotes()
         );
     }
+
 }

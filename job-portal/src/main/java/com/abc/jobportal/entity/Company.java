@@ -19,19 +19,19 @@ import java.util.List;
         @NamedQuery(name = "Company.updateCompanyDetails",
                 query =
                         """
-                                UPDATE Company c SET
-                                                            c.name = :name,
-                                                            c.logo = :logo,
-                                                            c.industry = :industry,
-                                                            c.size = :size,
-                                                            c.rating = :rating,
-                                                            c.locations = :locations,
-                                                            c.founded = :founded,
-                                                            c.description = :description,
-                                                            c.employees = :employees,
-                                                            c.website = :website
-                                                        WHERE c.id = :id
-                        """
+                                        UPDATE Company c SET
+                                                                    c.name = :name,
+                                                                    c.logo = :logo,
+                                                                    c.industry = :industry,
+                                                                    c.size = :size,
+                                                                    c.rating = :rating,
+                                                                    c.locations = :locations,
+                                                                    c.founded = :founded,
+                                                                    c.description = :description,
+                                                                    c.employees = :employees,
+                                                                    c.website = :website
+                                                                WHERE c.id = :id
+                                """
         )})
 @NamedNativeQueries({
         @NamedNativeQuery(name = "Company.fetchCompaniesWithJobsByStatusNative",

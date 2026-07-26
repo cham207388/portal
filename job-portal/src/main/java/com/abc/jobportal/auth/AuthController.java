@@ -30,13 +30,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
+
     private final JwtUtil jwtUtil;
+
     private final PasswordEncoder passwordEncoder;
+
     private final JobPortalUserRepository jobPortalUserRepository;
+
     private final RoleRepository roleRepository;
 
-    @PostMapping(value = "/login/public",version = "1.0")
+    @PostMapping(value = "/login/public", version = "1.0")
     public ResponseEntity<LoginResponseDto> apiLogin(@RequestBody LoginRequestDto loginRequestDto) {
+
         try {
             var resultAuthentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequestDto.username(),
                     loginRequestDto.password()));
@@ -63,8 +68,9 @@ public class AuthController {
 
     }
 
-    @PostMapping(value = "/register/public",version = "1.0")
+    @PostMapping(value = "/register/public", version = "1.0")
     public ResponseEntity<?> registerUser(@RequestBody RegisterRequestDto registerRequestDto) {
+
         JobPortalUser jobPortalUser = new JobPortalUser();
         BeanUtils.copyProperties(registerRequestDto, jobPortalUser);
         jobPortalUser.setPasswordHash(passwordEncoder.encode(registerRequestDto.password()));
@@ -77,7 +83,8 @@ public class AuthController {
     }
 
     private ResponseEntity<LoginResponseDto> buildErrorResponse(HttpStatus status,
-            String message) {
+                                                                String message) {
+
         return ResponseEntity
                 .status(status)
                 .body(new LoginResponseDto(message, null, null));

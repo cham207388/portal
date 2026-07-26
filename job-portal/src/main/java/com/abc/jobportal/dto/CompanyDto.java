@@ -44,5 +44,6 @@ public record CompanyDto(
         String website,
 
         Instant createdAt, List<JobDto> jobs) {
+
 }
 

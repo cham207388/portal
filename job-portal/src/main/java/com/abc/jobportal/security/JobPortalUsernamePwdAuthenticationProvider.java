@@ -23,10 +23,12 @@ import java.util.List;
 public class JobPortalUsernamePwdAuthenticationProvider implements AuthenticationProvider {
 
     private final JobPortalUserRepository jobPortalUserRepository;
+
     private final PasswordEncoder passwordEncoder;
 
     @Override
     public @Nullable Authentication authenticate(Authentication authentication) throws AuthenticationException {
+
         String username = authentication.getName();
         String pwd = authentication.getCredentials().toString();
         JobPortalUser jobPortalUser = jobPortalUserRepository.findJobPortalUserByEmail(username)
@@ -44,6 +46,8 @@ public class JobPortalUsernamePwdAuthenticationProvider implements Authenticatio
 
     @Override
     public boolean supports(Class<?> authentication) {
+
         return (UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication));
     }
+
 }

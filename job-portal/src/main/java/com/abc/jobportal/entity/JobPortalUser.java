@@ -16,6 +16,7 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class JobPortalUser extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -61,4 +62,5 @@ public class JobPortalUser extends BaseEntity {
 
     @OneToMany(mappedBy = "user")
     private Set<JobApplication> jobApplications = new LinkedHashSet<>();
+
 }

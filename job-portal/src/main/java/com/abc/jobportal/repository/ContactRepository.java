@@ -22,5 +22,6 @@ public interface ContactRepository extends JpaRepository<Contact, Long> {
 
     @Modifying
     int updateStatusById(@Param("status") String status, @Param("id") Long id,
-            @Param("updatedBy") String updatedBy);
+                         @Param("updatedBy") String updatedBy);
+
 }

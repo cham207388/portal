@@ -30,4 +30,5 @@ public record ContactRequestDto(
         String userType
 
 ) implements Serializable {
+
 }

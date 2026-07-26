@@ -24,6 +24,7 @@ public class JobPortalNonProdUsernamePwdAuthenticationProvider implements Authen
 
     @Override
     public @Nullable Authentication authenticate(Authentication authentication) throws AuthenticationException {
+
         String username = authentication.getName();
         //String pwd = authentication.getCredentials().toString();
         JobPortalUser jobPortalUser = jobPortalUserRepository.findJobPortalUserByEmail(username)
@@ -37,6 +38,8 @@ public class JobPortalNonProdUsernamePwdAuthenticationProvider implements Authen
 
     @Override
     public boolean supports(Class<?> authentication) {
+
         return (UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication));
     }
+
 }

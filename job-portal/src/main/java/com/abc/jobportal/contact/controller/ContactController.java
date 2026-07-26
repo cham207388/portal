@@ -22,7 +22,8 @@ public class ContactController {
 
     @PostMapping(path = "/public", version = "1.0")
     public ResponseEntity<String> saveContactMsg(@RequestBody @Valid ContactRequestDto contactRequestDto) {
-        boolean isSaved =  contactService.saveContact(contactRequestDto);
+
+        boolean isSaved = contactService.saveContact(contactRequestDto);
         if (isSaved) {
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body("Request processed successfully");
@@ -34,6 +35,7 @@ public class ContactController {
 
     @GetMapping("/admin")
     public ResponseEntity<List<ContactResponseDto>> fetchNewContactMsgs() {
+
         List<ContactResponseDto> contactResponseDtos = contactService.fetchNewContactMsgs();
         return ResponseEntity.status(HttpStatus.OK).body(contactResponseDtos);
     }
@@ -42,6 +44,7 @@ public class ContactController {
     public ResponseEntity<List<ContactResponseDto>> fetchNewContactMsgsWithSort(
             @RequestParam(defaultValue = "createdAt") String sortBy,
             @RequestParam(defaultValue = "asc") String sortDir) {
+
         List<ContactResponseDto> contactResponseDtos = contactService
                 .fetchNewContactMsgsWithSort(sortBy, sortDir);
         return ResponseEntity.status(HttpStatus.OK).body(contactResponseDtos);
@@ -53,6 +56,7 @@ public class ContactController {
             @RequestParam(defaultValue = "10") int pageSize,
             @RequestParam(defaultValue = "createdAt") String sortBy,
             @RequestParam(defaultValue = "asc") String sortDir) {
+
         Page<ContactResponseDto> contactResponseDtoPage = contactService
                 .fetchNewContactMsgsWithPaginationAndSort(pageNumber, pageSize, sortBy, sortDir);
         return ResponseEntity.status(HttpStatus.OK).body(contactResponseDtoPage);
@@ -60,6 +64,7 @@ public class ContactController {
 
     @PatchMapping("/{id}/status/admin")
     public ResponseEntity<String> closeContactMsg(@PathVariable String id) {
+
         boolean isUpdated = contactService.closeContactMsg(Long.valueOf(id),
                 ApplicationConstants.CLOSED_MESSAGE);
         if (isUpdated) {
@@ -68,4 +73,5 @@ public class ContactController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to update contact message.");
         }
     }
+
 }

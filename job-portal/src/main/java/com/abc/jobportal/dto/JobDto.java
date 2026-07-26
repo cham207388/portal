@@ -30,4 +30,5 @@ public record JobDto(
         Boolean remote,
         String status
 ) implements Serializable {
+
 }

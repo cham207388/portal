@@ -15,4 +15,5 @@ public record JobApplicationDto(
         String coverLetter,
         String notes
 ) {
+
 }

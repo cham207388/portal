@@ -52,10 +52,11 @@ public class JobPortalSecurityConfig {
 
     @Bean
     SecurityFilterChain customSecurityFilterChain(HttpSecurity http) {
+
         return http.csrf(csrfConfig ->
                         csrfConfig.ignoringRequestMatchers("/jobportal/actuator/**")
-                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                        .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler()))
+                                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                                .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler()))
                 .cors(corsConfig -> corsConfig.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(requests -> {
                     publicPaths.forEach(path -> requests.requestMatchers(path).permitAll());
@@ -69,17 +70,18 @@ public class JobPortalSecurityConfig {
                 .formLogin(flc -> flc.disable())
                 .httpBasic(hbc -> hbc.disable())
                 .exceptionHandling(exception -> exception
-                                .accessDeniedHandler((request, response, accessDeniedException) -> {
-                                    response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-                                    response.setContentType("application/json");
-                                    response.getWriter().write("{\"error\": \"Access Denied\", \"message\": \"You don't have permission to access this resource\"}");
-                                })
+                        .accessDeniedHandler((request, response, accessDeniedException) -> {
+                            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                            response.setContentType("application/json");
+                            response.getWriter().write("{\"error\": \"Access Denied\", \"message\": \"You don't have permission to access this resource\"}");
+                        })
                 )
                 .build();
     }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
+
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(corsProperties.getAllowedOrigins());
         config.setAllowedMethods(corsProperties.getAllowedMethods());
@@ -94,16 +96,20 @@ public class JobPortalSecurityConfig {
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationProvider authenticationProvider) {
+
         return new ProviderManager(authenticationProvider);
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
+
         return new BCryptPasswordEncoder();
     }
 
     @Bean
     public CompromisedPasswordChecker compromisedPasswordChecker() {
+
         return new HaveIBeenPwnedRestApiPasswordChecker();
     }
+
 }

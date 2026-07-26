@@ -7,7 +7,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.util.List;
 
 @ConfigurationProperties(prefix = "app.cors")
-@Getter @Setter
+@Getter
+@Setter
 public class CorsProperties {
 
     private List<String> allowedOrigins;
@@ -19,4 +20,5 @@ public class CorsProperties {
     private Boolean allowCredentials;
 
     private Long maxAge;
+
 }

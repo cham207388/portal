@@ -23,4 +23,5 @@ public interface JobApplicationRepository extends JpaRepository<JobApplication, 
     @Modifying
     int updateStatusAndNotesById(@Param("status") String status, @Param("notes") String notes,
                                  @Param("id") Long id, @Param("updatedBy") String updatedBy);
+
 }

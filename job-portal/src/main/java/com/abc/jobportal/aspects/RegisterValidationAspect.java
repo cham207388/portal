@@ -24,13 +24,15 @@ import java.util.Optional;
 public class RegisterValidationAspect {
 
     private final CompromisedPasswordChecker compromisedPasswordChecker;
+
     private final JobPortalUserRepository jobPortalUserRepository;
 
     @Before("""
-        execution(* com.abc.jobportal.auth.AuthController
-        .registerUser(..))
-        """)
+            execution(* com.abc.jobportal.auth.AuthController
+            .registerUser(..))
+            """)
     public void validateBeforeRegister(JoinPoint joinPoint) {
+
         Object[] args = joinPoint.getArgs();
         RegisterRequestDto request = (RegisterRequestDto) args[0];
         log.info("🔍 Validating user registration request");

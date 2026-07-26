@@ -16,6 +16,7 @@ public class LoggingAndPerformanceAspect {
     // @Around("@annotation(com.abc.jobportal.aspects.LogAspect)")
     @Around("execution(* com.abc.jobportal..*.*(..))")
     public Object logAndMeasureExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
+
         long startTime = System.currentTimeMillis();
         String methodName = joinPoint.getSignature().toShortString();
         Object[] methodArgs = joinPoint.getArgs();
@@ -28,4 +29,5 @@ public class LoggingAndPerformanceAspect {
         log.info("⏱ Execution time: {} ms", executionTime);
         return result;
     }
+
 }

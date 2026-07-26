@@ -7,6 +7,7 @@ import com.abc.jobportal.dto.UpdateJobApplicationDto;
 import java.util.List;
 
 public interface IJobService {
+
     List<JobDto> getEmployerJobs(String employerEmail);
 
     JobDto updateJobStatus(Long jobId, String status, String employerEmail);
@@ -16,4 +17,5 @@ public interface IJobService {
     List<JobApplicationDto> getApplicationsByJobForEmployer(Long jobId);
 
     boolean updateJobApplication(UpdateJobApplicationDto updateJobApplicationDto);
+
 }

@@ -12,11 +12,19 @@ import java.time.Instant;
 public class UserDto {
 
     private Long userId;
+
     private String name;
+
     private String email;
+
     private String mobileNumber;
+
     private String role;
+
     private Long companyId;
+
     private String companyName;
+
     private Instant createdAt;
+
 }

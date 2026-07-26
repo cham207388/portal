@@ -28,6 +28,7 @@ public class ContactServiceImpl implements IContactService {
     @Override
     @Transactional
     public boolean saveContact(ContactRequestDto contactRequestDto) {
+
         boolean result = false;
         Contact contact = contactRepository.save(transformToEntity(contactRequestDto));
         if (contact != null && contact.getId() != null) {
@@ -38,6 +39,7 @@ public class ContactServiceImpl implements IContactService {
 
     @Override
     public List<ContactResponseDto> fetchNewContactMsgs() {
+
         List<Contact> contacts = contactRepository.findContactsByStatusOrderByCreatedAtAsc
                 (ApplicationConstants.NEW_MESSAGE);
         List<ContactResponseDto> responseDtos = contacts.stream()
@@ -81,6 +83,7 @@ public class ContactServiceImpl implements IContactService {
     @Override
     @Transactional
     public boolean closeContactMsg(Long id, String status) {
+
         Contact contact = contactRepository.findById(id).orElse(null);
         if (contact == null) {
             return false;
@@ -92,6 +95,7 @@ public class ContactServiceImpl implements IContactService {
     }
 
     private Contact transformToEntity(ContactRequestDto contactRequestDto) {
+
         Contact contact = new Contact();
         BeanUtils.copyProperties(contactRequestDto, contact);
         contact.setStatus(ApplicationConstants.NEW_MESSAGE);
@@ -99,9 +103,11 @@ public class ContactServiceImpl implements IContactService {
     }
 
     private ContactResponseDto transformToDto(Contact contact) {
+
         ContactResponseDto contactResponseDto = new ContactResponseDto(contact.getId(),
                 contact.getName(), contact.getEmail(), contact.getUserType(), contact.getSubject(),
                 contact.getMessage(), contact.getStatus(), contact.getCreatedAt());
         return contactResponseDto;
     }
+
 }

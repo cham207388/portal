@@ -40,4 +40,5 @@ public record ProfileDto(
         Instant createdAt,
         Instant updatedAt
 ) {
+
 }

@@ -26,11 +26,14 @@ import java.util.stream.Collectors;
 public class JobServiceImpl implements IJobService {
 
     private final JobRepository jobRepository;
+
     private final JobPortalUserRepository userRepository;
+
     private final JobApplicationRepository jobApplicationRepository;
 
     @Override
     public List<JobDto> getEmployerJobs(String employerEmail) {
+
         JobPortalUser employer = userRepository.findJobPortalUserByEmail(employerEmail)
                 .orElseThrow(() -> new RuntimeException("Employer not found"));
 
@@ -83,6 +86,7 @@ public class JobServiceImpl implements IJobService {
 
     @Override
     public List<JobApplicationDto> getApplicationsByJobForEmployer(Long jobId) {
+
         List<JobApplication> applications = jobApplicationRepository.findByJobIdOrderByAppliedAtAsc(jobId);
         return applications.stream()
                 .map(jobApplication -> ApplicationUtility.mapToJobApplicationDto(jobApplication))
@@ -92,14 +96,17 @@ public class JobServiceImpl implements IJobService {
     @Transactional
     @Override
     public boolean updateJobApplication(UpdateJobApplicationDto dto) {
+
         int updatedRows = jobApplicationRepository.updateStatusAndNotesById(
-                dto.status().name(), dto.notes(),dto.applicationId(), ApplicationUtility.getLoggedInUser());
+                dto.status().name(), dto.notes(), dto.applicationId(), ApplicationUtility.getLoggedInUser());
         return updatedRows > 0;
     }
 
     private Job tranformDtoToEntity(JobDto jobDto) {
+
         Job job = new Job();
         BeanUtils.copyProperties(jobDto, job);
         return job;
     }
+
 }
